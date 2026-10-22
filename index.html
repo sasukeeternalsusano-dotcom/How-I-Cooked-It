@@ -1,0 +1,271 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>How I Cooked It</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a kitchen order rail — one column of white "tickets" pinned on butter-yellow, stickers for stats, disasters on pink. */
+:root{
+  --butter:#ffe45c; --ink:#1b1530; --ticket:#fffdf6; --pink:#ff5fa2; --pinkpale:#ffd6e8; --sky:#3f6fff; --mint:#29b37a; --muted:#5b5470;
+  --display:"Bricolage Grotesque","Arial Black",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+body{background:var(--butter);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55}
+main{max-width:720px;margin:0 auto;padding-block:28px 80px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:22px}
+.hero{position:relative;padding-top:56px}
+.hero .sky{position:absolute;top:0;left:0;right:0;height:56px;overflow:hidden}
+.flyer{position:absolute;top:10px;left:-60px;width:44px;height:44px;animation:cross 9s linear infinite}
+.flyer .w{transform-origin:22px 22px;animation:flap .22s ease-in-out infinite alternate}
+@keyframes cross{0%{transform:translate(0,10px)}25%{transform:translate(30vw,-6px)}50%{transform:translate(60vw,12px)}75%{transform:translate(90vw,-4px)}100%{transform:translate(120vw,8px)}}
+@keyframes flap{to{transform:scaleX(.25)}}
+.kicker{font-family:var(--mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(46px,13vw,96px);line-height:.9;letter-spacing:-.03em;margin:8px 0 14px;text-wrap:balance}
+h1 em{font-style:normal;color:var(--pink);display:inline-block;transform:rotate(-3deg)}
+.lede{font-size:20px;max-width:34ch;margin:0}
+.stickers{display:flex;flex-wrap:wrap;gap:10px}
+.st{background:var(--ink);color:var(--butter);border-radius:14px;padding:10px 14px;display:flex;flex-direction:column;transform:rotate(var(--r,0deg));box-shadow:3px 3px 0 var(--pink)}
+.st b{font-family:var(--display);font-size:28px;line-height:1;font-variant-numeric:tabular-nums}
+.st span{font-size:13px;color:#fff6c2}
+h2{font-family:var(--display);font-weight:800;font-size:clamp(28px,7vw,40px);line-height:1;margin:24px 0 0;letter-spacing:-.02em}
+.ingredients{background:var(--ticket);border:2px solid var(--ink);border-radius:6px;padding:16px 18px;box-shadow:6px 6px 0 var(--ink)}
+.ingredients ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:6px 18px}
+.ingredients li{display:flex;gap:8px;align-items:baseline}
+.ingredients li::before{content:"";flex:none;width:9px;height:9px;border-radius:50%;background:var(--pink);transform:translateY(-1px)}
+.ticket{position:relative;background:var(--ticket);border:2px solid var(--ink);border-radius:6px;padding:18px 18px 20px;box-shadow:6px 6px 0 var(--ink);display:flex;flex-direction:column;gap:10px;min-width:0}
+.ticket::before{content:"";position:absolute;top:-9px;left:50%;width:16px;height:16px;margin-left:-8px;border-radius:50%;background:var(--pink);border:2px solid var(--ink)}
+.ticket .no{font-family:var(--mono);font-size:12px;font-weight:600;letter-spacing:.08em;color:var(--muted)}
+.ticket h3{font-family:var(--display);font-weight:800;font-size:24px;line-height:1.1;margin:0;text-wrap:balance}
+.ticket p{margin:0;max-width:62ch}
+pre{margin:0;background:var(--ink);color:#f3efff;border-radius:8px;padding:12px 14px;overflow-x:auto;font-family:var(--mono);font-size:13px;line-height:1.55}
+pre .c{color:#a99fd0}
+pre .k{color:var(--butter)}
+pre .s{color:#8ff0c0}
+code{font-family:var(--mono);font-size:.88em;background:var(--pinkpale);padding:1px 5px;border-radius:4px}
+.demo{display:flex;flex-wrap:wrap;gap:12px;align-items:center;background:#fff6c2;border:2px dashed var(--ink);border-radius:8px;padding:12px}
+.demo svg{display:block;max-width:100%}
+.demo .cap{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.btn{font:700 15px var(--body);background:var(--pink);color:#fff;border:2px solid var(--ink);border-radius:99px;padding:8px 16px;cursor:pointer;box-shadow:3px 3px 0 var(--ink);transition:transform .1s,box-shadow .1s}
+.btn:active{transform:translate(3px,3px);box-shadow:0 0 0 var(--ink)}
+.btn:focus-visible,input:focus-visible{outline:3px solid var(--sky);outline-offset:2px}
+.range{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:13px}
+.range input{accent-color:var(--pink);width:140px}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.duo div{min-width:0;text-align:center;display:flex;flex-direction:column;align-items:center;gap:4px;background:#163a44;border-radius:8px;padding:6px}
+.duo .cap{color:#fff6c2}
+.disasters{display:flex;flex-direction:column;gap:12px}
+.oops{background:var(--pinkpale);border:2px solid var(--ink);border-radius:6px;padding:14px 16px;display:grid;grid-template-columns:auto 1fr;gap:4px 12px;box-shadow:4px 4px 0 var(--pink)}
+.oops .fire{grid-row:span 2;font-family:var(--display);font-weight:800;font-size:22px;color:var(--pink);line-height:1.2}
+.oops b{font-family:var(--display);font-size:18px}
+.oops p{margin:0}
+.note{background:var(--ink);color:var(--butter);border-radius:10px;padding:24px 22px;transform:rotate(-1deg);box-shadow:6px 6px 0 var(--pink)}
+.note p{margin:0;font-family:var(--display);font-weight:800;font-size:clamp(24px,6vw,34px);line-height:1.15;text-wrap:balance}
+.note p em{font-style:normal;color:var(--pink)}
+.note small{display:block;margin-top:12px;font-family:var(--mono);font-size:13px;color:#fff6c2}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important}}
+</style>
+
+<main>
+  <header class="hero">
+    <div class="sky" aria-hidden="true">
+      <svg class="flyer" viewBox="0 0 44 44"><g class="w"><path d="M22 20C19 9 7 4 5 12c-1 6 8 9 17 8zm0 0c3-11 15-16 17-8 1 6-8 9-17 8zm0 3c-6 2-12 9-9 12 3 3 8-5 9-12zm0 0c6 2 12 9 9 12-3 3-8-5-9-12z" fill="#ff5fa2" stroke="#1b1530" stroke-width="1.5"/></g><rect x="21" y="13" width="2" height="19" rx="1" fill="#1b1530"/></svg>
+    </div>
+    <div class="kicker">For Danoya, who keeps asking</div>
+    <h1>How I <em>cooked</em> your Atlas</h1>
+    <p class="lede">You always ask how I code this stuff. So here's the whole recipe, every step, including the parts where it caught fire.</p>
+  </header>
+
+  <div class="stickers">
+    <div class="st" style="--r:-2deg"><b>757</b><span>lines of code</span></div>
+    <div class="st" style="--r:1.5deg"><b>678</b><span>coastline dots placed by hand</span></div>
+    <div class="st" style="--r:-1deg"><b>20</b><span>animals drawn from shapes</span></div>
+    <div class="st" style="--r:2deg"><b>19:41</b><span>minutes of my voice</span></div>
+    <div class="st" style="--r:-1.5deg"><b>0</b><span>animal photos downloaded</span></div>
+  </div>
+
+  <h2>Ingredients</h2>
+  <div class="ingredients">
+    <ul>
+      <li>HTML, for the skeleton</li>
+      <li>CSS, for the outfit and the wiggles</li>
+      <li>JavaScript, for the brain</li>
+      <li>SVG, for the map and every drawing</li>
+      <li>Canvas, for the butterfly swarm</li>
+      <li>Python, for squishing your photo</li>
+      <li>ffmpeg, for cleaning up my voice</li>
+      <li>One butterfly with a lot of stamina</li>
+    </ul>
+  </div>
+
+  <h2>The method</h2>
+
+  <article class="ticket">
+    <span class="no">Step 01</span>
+    <h3>Decide the vibe</h3>
+    <p>Night-time world map, deep ocean blue, land in sage green. A little gold butterfly does the flying, because obviously. Everything turns pink when it's flying to you. Every page starts as a few colour codes written at the very top, and the whole thing gets built from them.</p>
+<pre><span class="c">/* the whole palette, decided before anything else */</span>
+<span class="k">--ocean</span>: <span class="s">#0c2430</span>;  <span class="k">--land</span>: <span class="s">#2e5a4c</span>;
+<span class="k">--gold</span>:  <span class="s">#ffc65a</span>;  <span class="k">--pink</span>: <span class="s">#ff8fb8</span>;  <span class="c">/* yours */</span></pre>
+  </article>
+
+  <article class="ticket">
+    <span class="no">Step 02</span>
+    <h3>Draw the whole planet. By hand. Dot by dot.</h3>
+    <p>The plan was to just download a world map. The internet said no, the download got blocked. So I drew every continent myself, as a list of longitude and latitude points going around each coastline. 678 of them. Here's the UK, which is basically just 20 dots holding hands:</p>
+<pre><span class="c">// the UK, going clockwise from Cornwall</span>
+[[<span class="s">-5.7,50</span>],[<span class="s">1.3,51.1</span>],[<span class="s">1.7,52.6</span>],[<span class="s">0.3,53.4</span>],
+ [<span class="s">-0.2,54.2</span>],[<span class="s">-1.6,55.6</span>], ... ]
+<span class="c">// Middlesbrough lives around [-1.24, 54.57] btw</span></pre>
+  </article>
+
+  <article class="ticket">
+    <span class="no">Step 03</span>
+    <h3>Squash a round planet flat</h3>
+    <p>Earth is a ball, screens are flat. To turn latitude and longitude into x and y on the screen, I used a map formula called the Miller projection. Longitude is easy (just spread it across the width). Latitude needs a bit of log-and-tangent maths so countries near the poles don't stretch into spaghetti.</p>
+<pre><span class="k">const</span> my = lat =&gt; <span class="s">-1.25</span> * Math.log(
+  Math.tan(Math.PI / <span class="s">4</span> + <span class="s">0.4</span> * lat * Math.PI / <span class="s">180</span>)) * R;
+<span class="k">const</span> P = (lon, lat) =&gt; [(lon + <span class="s">180</span>) / <span class="s">360</span> * W, my(lat) - Y0];</pre>
+  </article>
+
+  <article class="ticket">
+    <span class="no">Step 04</span>
+    <h3>Pick the animals and fact-check them</h3>
+    <p>Twenty animals across the world, with extra butterflies and birds for you. For each one I wrote down where it lived, when it was last seen, and three facts, then double-checked them, because if I told you a wrong fact about a dodo you would never let it go.</p>
+<pre>{ n: <span class="s">"Dodo"</span>, ll: [<span class="s">57.55</span>, <span class="s">-20.3</span>], y: <span class="s">"Last seen c. 1662"</span>,
+  f: [<span class="s">"It was basically a giant pigeon..."</span>, ...] }</pre>
+  </article>
+
+  <article class="ticket">
+    <span class="no">Step 05</span>
+    <h3>Teach a butterfly to flap</h3>
+    <p>The wings are two shapes, a left one and a mirrored right one. Every frame, I squish them sideways using a sine wave, so they go wide, thin, wide, thin. That's literally it. Drag the slider to see what too much coffee looks like.</p>
+    <div class="demo">
+      <svg id="bf" width="120" height="90" viewBox="-30 -26 60 48" aria-label="Flapping butterfly demo" role="img">
+        <g id="bfw"><path d="M0 0C-6-16-26-22-24-6C-23 2-10 4 0 0ZM0 2C-8 6-20 14-14 20C-9 24-3 12 0 2Z" fill="#ffc65a" stroke="#1b1530" stroke-width="1.2"/><path d="M0 0C6-16 26-22 24-6C23 2 10 4 0 0ZM0 2C8 6 20 14 14 20C9 24 3 12 0 2Z" fill="#ffc65a" stroke="#1b1530" stroke-width="1.2"/></g>
+        <ellipse rx="2.4" ry="11" cy="3" fill="#1b1530"/>
+      </svg>
+      <label class="range" for="speed">flap speed <input id="speed" type="range" min="20" max="400" value="95"></label>
+    </div>
+<pre><span class="k">const</span> flap = <span class="s">.3</span> + <span class="s">.7</span> * Math.abs(Math.sin(now / <span class="s">95</span>));
+wings.setAttribute(<span class="s">"transform"</span>, <span class="s">`scale(${flap},1)`</span>);</pre>
+  </article>
+
+  <article class="ticket">
+    <span class="no">Step 06</span>
+    <h3>Make it actually fly somewhere</h3>
+    <p>Between two stops, the butterfly follows a curve (a "bezier curve", fancy name for a rainbow-shaped path). While it flies, the camera zooms out so you can see where it's going, then zooms back in when it lands. The camera is just me changing which part of the map is visible, sixty times a second.</p>
+<pre><span class="c">// position along the curve, t goes 0 → 1</span>
+x = (<span class="s">1</span>-t)²·from + <span class="s">2</span>(<span class="s">1</span>-t)t·lift + t²·to
+<span class="c">// zoom out in the middle of the flight, back in at the end</span>
+cam.z = lerp(zoomStop, zoomMid, Math.sin(Math.PI * t));</pre>
+  </article>
+
+  <article class="ticket">
+    <span class="no">Step 07</span>
+    <h3>Draw twenty animals out of circles and blobs</h3>
+    <p>No photos, no copying. Every animal is drawn in code from ellipses, rectangles and curvy paths. A tiger is an orange oval with five black squiggles on it. Then I gave them little animations: birds bob, butterflies flap, the dolphin swims, the big guys breathe.</p>
+    <p>My first huia had a beak that looked like a rhino horn. Here's the glow-up:</p>
+    <div class="duo">
+      <div><svg viewBox="72 0 130 116" style="width:100%;height:auto;max-width:200px" role="img" aria-label="Huia with a horn-shaped beak"><ellipse cx="108" cy="78" rx="30" ry="21" fill="#1a1c22" transform="rotate(-15 108 78)"/><circle cx="136" cy="56" r="14" fill="#1a1c22"/><circle cx="146" cy="64" r="5" fill="#ff8a1f"/><path d="M141 46C150 30 160 16 174 4C166 22 158 38 149 54Z" fill="#efe3c4"/><circle cx="138" cy="52" r="2.2" fill="#e8e0d0"/></svg><span class="cap">before: unicorn</span></div>
+      <div><svg viewBox="72 0 130 116" style="width:100%;height:auto;max-width:200px" role="img" aria-label="Huia with a proper curved beak"><ellipse cx="108" cy="78" rx="30" ry="21" fill="#1a1c22" transform="rotate(-15 108 78)"/><circle cx="136" cy="56" r="14" fill="#1a1c22"/><circle cx="146" cy="64" r="5" fill="#ff8a1f"/><path d="M147 57C166 62 180 80 182 110C172 90 160 74 145 64Z" fill="#efe3c4"/><circle cx="138" cy="52" r="2.2" fill="#e8e0d0"/></svg><span class="cap">after: actual bird</span></div>
+    </div>
+  </article>
+
+  <article class="ticket">
+    <span class="no">Step 08</span>
+    <h3>The last stop: you</h3>
+    <p>I cropped your photo, blurred your work badge (privacy queen), shrank it, and turned the image into a long string of letters so it lives inside the code itself. Your name drops in letter by letter, the photo lands like a polaroid, and a swarm of butterflies and birds is drawn on a canvas, each one floating up on its own wobbly path.</p>
+<pre><span class="c">// each butterfly in the swarm</span>
+b.y -= b.speed;
+b.x += Math.sin(now / <span class="s">900</span> + b.phase) * <span class="s">.9</span>;  <span class="c">// the wobble</span></pre>
+  </article>
+
+  <article class="ticket">
+    <span class="no">Step 09</span>
+    <h3>Grow you a garden</h3>
+    <p>Daffodils, tulips and lilies, all made in code. A daffodil is six ellipses spun around a centre with an orange dot in the middle. A lily is six pointy petals. Each flower starts squished to zero height and grows up out of the ground. Press the button, watch them sprout.</p>
+    <div class="demo" style="flex-direction:column;align-items:stretch">
+      <svg id="garden" viewBox="0 0 400 130" style="width:100%;height:auto;background:#163a44;border-radius:8px" role="img" aria-label="Flowers growing"></svg>
+      <div style="display:flex;gap:10px;align-items:center"><button class="btn" id="grow">Grow again</button><span class="cap">13 flowers, 3 kinds</span></div>
+    </div>
+  </article>
+
+  <article class="ticket">
+    <span class="no">Step 10</span>
+    <h3>Put my voice in it</h3>
+    <p>I recorded a voice note for every stop, 22 clips, almost 20 minutes total. Then I ran them through ffmpeg to even out the volume (so I'm not whispering at one stop and yelling at the next) and converted them to MP3. When the butterfly lands, my clip plays. When you tap next, it stops, so I never talk over myself.</p>
+<pre>ffmpeg -i <span class="s">New_Recording_59.m4a</span> -ac <span class="s">1</span> \
+  -af loudnorm=I=<span class="s">-16</span> -b:a <span class="s">64k</span> <span class="s">00.mp3</span>   <span class="c"># x22</span></pre>
+  </article>
+
+  <article class="ticket">
+    <span class="no">Step 11</span>
+    <h3>Test it with a robot</h3>
+    <p>I ran the page in a hidden robot browser that clicks Take off, waits, takes screenshots, and tells me if anything errored. It caught a few problems before you ever could.</p>
+  </article>
+
+  <article class="ticket">
+    <span class="no">Step 12</span>
+    <h3>Pack it all into one file</h3>
+    <p>The map, the drawings, your photo and all my voice notes got squeezed into a single HTML file, 12.8 MB. No internet needed, no extra files. Open it anywhere and it just works.</p>
+  </article>
+
+  <h2>Kitchen disasters</h2>
+  <div class="disasters">
+    <div class="oops"><span class="fire">01</span><b>The map download got blocked</b><p>So I hand-drew the planet. Character development.</p></div>
+    <div class="oops"><span class="fire">02</span><b>The invisible button</b><p>The Skip bar was hidden, but my styles forced it to still exist, invisibly sitting on top of the Take off button and eating every tap. Fixed with one line that says hidden means hidden.</p></div>
+    <div class="oops"><span class="fire">03</span><b>Find-and-replace panicked</b><p>I told it to change one bit of code, it found the same text twice, and refused to guess which one I meant. Fair enough honestly.</p></div>
+    <div class="oops"><span class="fire">04</span><b>The unicorn huia</b><p>See Step 07. We don't talk about it.</p></div>
+    <div class="oops"><span class="fire">05</span><b>Two voice notes went missing</b><p>Recordings 71 and 72, the aurochs and the great auk, didn't upload the first time. Found them, slotted them in.</p></div>
+  </div>
+
+  <div class="note">
+    <p>Took a lot of code. Took more <em>thinking about you</em> while writing it.</p>
+    <small>Chef's note: all of it was for you.</small>
+  </div>
+</main>
+
+<script>
+(() => {
+  // flapping demo with speed slider
+  const w = document.getElementById("bfw"), sp = document.getElementById("speed");
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function tick(now) {
+    const f = reduce ? 1 : .3 + .7 * Math.abs(Math.sin(now / (500 - +sp.value + 20)));
+    w.setAttribute("transform", `scale(${f},1)`);
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+
+  // garden demo
+  const g = document.getElementById("garden");
+  const leaf = (x, y, d) => `<path d="M${x} ${y}C${x + 14 * d} ${y - 6} ${x + 18 * d} ${y - 20} ${x + 8 * d} ${y - 28}C${x + 4 * d} ${y - 16} ${x} ${y - 8} ${x} ${y}Z" fill="#4f9a55"/>`;
+  const tulip = (x, y, c) => `<path d="M${x - 11} ${y}C${x - 13} ${y - 16} ${x - 6} ${y - 22} ${x - 2} ${y - 15}L${x} ${y - 22}L${x + 2} ${y - 15}C${x + 6} ${y - 22} ${x + 13} ${y - 16} ${x + 11} ${y}C${x + 7} ${y + 9} ${x - 7} ${y + 9} ${x - 11} ${y}Z" fill="${c}"/>`;
+  const daff = (x, y) => { let p = ""; for (let k = 0; k < 6; k++) p += `<ellipse cx="${x}" cy="${y - 10}" rx="5" ry="10" fill="#fff3a3" transform="rotate(${k * 60} ${x} ${y})"/>`; return p + `<circle cx="${x}" cy="${y}" r="6.5" fill="#ffb21f"/><circle cx="${x}" cy="${y}" r="3.5" fill="#ff8a00"/>`; };
+  const lily = (x, y, c) => { let p = ""; for (let k = 0; k < 6; k++) p += `<path d="M${x} ${y}C${x - 6} ${y - 8} ${x - 4} ${y - 18} ${x} ${y - 24}C${x + 4} ${y - 18} ${x + 6} ${y - 8} ${x} ${y}Z" fill="${c}" transform="rotate(${k * 60 + 30} ${x} ${y})"/>`; return p + `<g fill="#c0392b"><circle cx="${x - 3}" cy="${y - 4}" r="1.6"/><circle cx="${x + 3}" cy="${y - 4}" r="1.6"/><circle cx="${x}" cy="${y + 3}" r="1.6"/></g>`; };
+  const kinds = ["daff", "tulip", "lily", "tulip", "daff", "lily", "tulip", "daff", "lily", "tulip", "daff", "lily", "tulip"];
+  const tc = ["#ff5d8f", "#ff7a59", "#e8457a", "#ffb3c7"];
+  const flowers = kinds.map((k, i) => {
+    const x = 18 + i * 30.3, top = 34 + ((i * 37) % 4) * 9, base = 130;
+    const head = k === "daff" ? daff(x, top) : k === "tulip" ? tulip(x, top + 4, tc[i % 4]) : lily(x, top, i % 2 ? "#fff6fb" : "#ffc2dc");
+    return { x, html: `<path d="M${x} ${base}C${x - 3} ${base - 30} ${x + 3} ${top + 40} ${x} ${top + 6}" stroke="#3f8a48" stroke-width="3" fill="none"/>${leaf(x, base - 18, i % 2 ? 1 : -1)}${head}` };
+  });
+  g.innerHTML = flowers.map((f, i) => `<g id="fl${i}">${f.html}</g>`).join("");
+  let start = 0;
+  function grow(now) {
+    let busy = false;
+    flowers.forEach((f, i) => {
+      const t = Math.min(1, Math.max(0, (now - start - i * 120) / 900));
+      const e = t === 1 ? 1 : 1 - Math.pow(1 - t, 3) * Math.cos(t * 4);
+      if (t < 1) busy = true;
+      g.querySelector("#fl" + i).setAttribute("transform", `translate(0 130) scale(1 ${Math.max(0, e)}) translate(0 -130)`);
+    });
+    if (busy) requestAnimationFrame(grow);
+  }
+  const go = () => { if (reduce) return; start = performance.now(); requestAnimationFrame(grow); };
+  document.getElementById("grow").onclick = go;
+  go();
+})();
+</script>
+
+</body></html>
